@@ -1,0 +1,1 @@
+Visit https://hub.jazz.net/project/vaadin/vaadin-jpa-app/overview for more information
