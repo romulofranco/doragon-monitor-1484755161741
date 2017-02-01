@@ -1,5 +1,4 @@
 applications:
-- path: VaadinStarterApp.war
   memory: 512M
   instances: 1
   domain: mybluemix.net
@@ -7,4 +6,4 @@ applications:
   host: doragon-monitor
   disk_quota: 1024M
   services:
-  - doragon-monitor-elephantsql
+  - dashDB

@@ -147,17 +147,18 @@ public class MonitorCollectorService extends Application {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response insertMonitors(String[] monitors) {
 		
-		if (logger.isDebugEnabled()) {
-			logger.debug("insertMonitors: " + monitors);
-		}
 		
 		try {
 			DoragonMonitorService service = DoragonMonitorService.getInstance();
 			List<Monitor> monitorWrapped = service.wrapperMonitor(monitors);
 			
+			if (logger.isDebugEnabled()) {
+				logger.debug("insertMonitors: " + monitorWrapped.toArray());
+			}
+				
 			if (monitorWrapped.size() > 0) {
 				service.insertMonitors(monitorWrapped);
-				return Response.status(200).entity("Monitor successfully inserted on Database.").build();
+				return Response.status(200).entity(monitorWrapped.size() + " - Monitors successfully inserted on Database.").build();
 			} else {
 				return Response.status(200).entity("Invalid data").build();
 			}

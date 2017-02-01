@@ -12,12 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name = "monitor", schema = "doragmonitor")
+@Table(name = "monitor", schema = "dash6886")
 public class Monitor implements Serializable {
 
 	/**

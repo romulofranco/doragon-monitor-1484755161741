@@ -1,5 +1,7 @@
 package com.ibm.doragon.monitor.backend.service;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,9 +50,8 @@ public class DoragonMonitorService {
 		emFactory.close();
 	}
 
-
 	public List<Target> getAllTargets() {
-	
+
 		EntityManager em = this.getEntityManager();
 		TypedQuery<Target> q = em.createQuery("select t from Target t", Target.class);
 		List<Target> targets = q.getResultList();
@@ -59,14 +60,12 @@ public class DoragonMonitorService {
 	}
 
 	public boolean insertTarget(Target target) {
-		
+
 		EntityManager em = this.getEntityManager();
 		em.getTransaction().begin();
 		em.persist(target);
 		em.getTransaction().commit();
 		em.close();
-
-		
 
 		return true;
 	}
@@ -75,6 +74,19 @@ public class DoragonMonitorService {
 		EntityManager em = this.getEntityManager();
 		Target target = em.find(Target.class, id);
 		em.close();
+		if (target != null)
+			return target;
+		else
+			return null;
+	}
+
+	public Target findTarget(String targetName) {
+		EntityManager em = this.getEntityManager();
+		TypedQuery<Target> query = em.createQuery("select t from Target t where t.name = :name", Target.class);
+		query.setParameter("name", targetName);
+
+		Target target = query.getSingleResult();
+
 		if (target != null)
 			return target;
 		else
@@ -92,12 +104,13 @@ public class DoragonMonitorService {
 
 	public boolean insertMonitors(List<Monitor> monitors) {
 		EntityManager em = this.getEntityManager();
-
-		for (Monitor monitor : monitors) {
-			em.getTransaction().begin();
-			em.persist(monitor);
-			em.getTransaction().commit();
+		em.getTransaction().begin();
+		
+		for (Monitor monitor : monitors) {			
+			em.persist(monitor);			
 		}
+		
+		em.getTransaction().commit();
 
 		em.close();
 		return true;
@@ -107,10 +120,14 @@ public class DoragonMonitorService {
 	/**
 	 * Wrapper to convert a Array of monitor data in a Monitor entities Data:
 	 * 
-	 * @param data[0] = Target ID 
-	 * @param data[1] = Date/Time YYYY-MM-dd HH:mm:ss 
-	 * @param data[2] = Status (0 Failure, 1 OK) 
-	 * @param data[3] = Performance (Integer)
+	 * @param data[0]
+	 *            = Target ID
+	 * @param data[1]
+	 *            = Date/Time YYYY-MM-dd HH:mm:ss
+	 * @param data[2]
+	 *            = Status (0 Failure, 1 OK)
+	 * @param data[3]
+	 *            = Performance (Integer)
 	 * 
 	 * @param monitors
 	 * @return
@@ -169,4 +186,20 @@ public class DoragonMonitorService {
 		return null;
 
 	}
+
+	public List<Monitor> getMonitorNotSent() {
+		EntityManager em = this.getEntityManager();
+		TypedQuery<Monitor> query = em.createQuery("select m from Monitor m where m.sent = null or m.sent = 0",
+				Monitor.class);
+		List<Monitor> monitors = query.getResultList();
+		return monitors;
+	}
+
+	public String convertDateToString(Timestamp date) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		String dateString = dateFormat.format(date);
+		System.out.println(dateString);
+		return dateString;
+	}
+
 }

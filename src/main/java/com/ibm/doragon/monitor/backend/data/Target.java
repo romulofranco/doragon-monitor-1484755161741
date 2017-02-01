@@ -10,21 +10,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "target", schema = "doragmonitor")
+@Table(name = "target", schema = "dash6886")
 public class Target implements Serializable {
 
 	public static String ACCESS_TYPE_HTTP = "1";
 	public static String ACCESS_TYPE_PING = "2";
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column
+	private String environment;
+	
 	@Column
 	private String name;
 
@@ -43,6 +43,16 @@ public class Target implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	
+	
+	public String getEnvironment() {
+		return environment;
+	}
+
+	public void setEnvironment(String environment) {
+		this.environment = environment;
 	}
 
 	public String getName() {
@@ -104,8 +114,10 @@ public class Target implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Target [id=" + id + ", name=" + name + ", address=" + address + ", accessType=" + accessType
-				+ ", active=" + active + "]";
+		return "Target [id=" + id + ", environment=" + environment + ", name=" + name + ", address=" + address
+				+ ", accessType=" + accessType + ", active=" + active + "]";
 	}
+
+	
 
 }

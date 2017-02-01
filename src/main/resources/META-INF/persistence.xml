@@ -19,17 +19,31 @@
 		<!-- <property name="eclipselink.ddl-generation.output-mode" -->
 		<!-- value="database" /> -->
 		<!-- </properties> -->
+		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.ibm.db2.jcc.DB2Driver" />
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:db2://sbtsrmw2.austin.ibm.com:50006/maxdb71" />
-			<property name="javax.persistence.jdbc.user" value="maximo" />
-			<property name="javax.persistence.jdbc.password" value="maxadmin" />
+				value="jdbc:db2://dashdb-entry-yp-dal09-08.services.dal.bluemix.net:50000/BLUDB" />
+			<property name="javax.persistence.jdbc.user" value="dash6886" />
+			<property name="javax.persistence.jdbc.password" value="8eb4e49ebcf0" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.DB2Dialect" />
 			<property name="show_sql" value="true" />
-			<property name="hibernate.default_schema" value="doragmonitor" />
+			<property name="hibernate.default_schema" value="dash6886" />
 			<property name="hibernate.temp.use_jdbc_metadata_defaults"
 				value="false" />
 		</properties>
+		
+<!-- 		<properties> -->
+<!-- 			<property name="javax.persistence.jdbc.driver" value="com.ibm.db2.jcc.DB2Driver" /> -->
+<!-- 			<property name="javax.persistence.jdbc.url" -->
+<!-- 				value="jdbc:db2://sbtsrmw2.austin.ibm.com:50006/maxdb71" /> -->
+<!-- 			<property name="javax.persistence.jdbc.user" value="maximo" /> -->
+<!-- 			<property name="javax.persistence.jdbc.password" value="maxadmin" /> -->
+<!-- 			<property name="hibernate.dialect" value="org.hibernate.dialect.DB2Dialect" /> -->
+<!-- 			<property name="show_sql" value="true" /> -->
+<!-- 			<property name="hibernate.default_schema" value="doragmonitor" /> -->
+<!-- 			<property name="hibernate.temp.use_jdbc_metadata_defaults" -->
+<!-- 				value="false" /> -->
+<!-- 		</properties> -->
 	</persistence-unit>
 </persistence>
